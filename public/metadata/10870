@@ -1,0 +1,70 @@
+{
+  "name": "Rusty Robot #10870",
+  "description": "A collection of 11,111 unique Rusty Robot NFT art pieces on the IOTA network.",
+  "image": "ipfs://bafybeiacu2aagvvta6gugcpso4du6veyhbr5sqit44fi66o3qyff6dxhdq/cd13629b0b25525447b77b8bc57e009a0d9fecd731e6738b693cfc8113c4f438.png",
+  "assetId": "cd13629b0b25525447b77b8bc57e009a0d9fecd731e6738b693cfc8113c4f438",
+  "collection": "Rusty Robot Country Club",
+  "attributes": [
+    {
+      "trait_type": "background",
+      "value": "wine red"
+    },
+    {
+      "trait_type": "body",
+      "value": "green"
+    },
+    {
+      "trait_type": "button",
+      "value": "body basic"
+    },
+    {
+      "trait_type": "antenna",
+      "value": "old-school radio"
+    },
+    {
+      "trait_type": "eyes",
+      "value": "glass visor"
+    },
+    {
+      "trait_type": "mouth",
+      "value": "metal plate"
+    },
+    {
+      "trait_type": "face",
+      "value": "none"
+    },
+    {
+      "trait_type": "headgear",
+      "value": "none"
+    },
+    {
+      "trait_type": "outfit",
+      "value": "lumberjack shirt red"
+    },
+    {
+      "trait_type": "special",
+      "value": "none"
+    },
+    {
+      "trait_type": "accessory",
+      "value": "none"
+    },
+    {
+      "trait_type": "nft-l",
+      "value": false
+    },
+    {
+      "trait_type": "bonus",
+      "value": "none"
+    },
+    {
+      "trait_type": "wallet",
+      "value": 730
+    },
+    {
+      "trait_type": "og",
+      "value": false
+    }
+  ],
+  "external_url": "https://rustyrobot.io/collections/RRCC/10870"
+}

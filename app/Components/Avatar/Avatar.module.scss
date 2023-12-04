@@ -1,0 +1,48 @@
+@use '../../../styles/mixins' as *;
+
+.avatar {
+  position: relative;
+  cursor: pointer;
+  @include toRem(width, 350);
+  @include toRem(height, 350);
+
+
+
+
+  @include respond-to(md) {
+
+    @include toRem(width, 700);
+    @include toRem(height, 700);
+  }
+
+}
+
+.noFav {
+
+  @include toRem(width, 350);
+  @include toRem(height, 350);
+
+
+  @include respond-to(md) {
+    @include toRem(width, 670);
+    @include toRem(height, 670);
+  }
+
+  background: rgba(0, 0, 0, 0.30);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  border-radius: 15px;
+
+  margin: 15px;
+  cursor: pointer;
+
+  .icon {
+    @include toRem(width, 40);
+    @include toRem(height, 40);
+  }
+
+}

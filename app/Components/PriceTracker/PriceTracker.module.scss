@@ -1,0 +1,51 @@
+.container {
+  margin-top: 20px;
+  text-align: end;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.price {
+
+  display: flex;
+  gap: 7px;
+  color: #FFF;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: 1.44px;
+
+  .rust {
+    color: #E99922;
+  }
+}
+
+.shimmer {
+  color: #9E9E9E;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0.96px;
+
+  margin-bottom: 10px;
+}
+
+.pill {
+  border-radius: 100px;
+  width: auto;
+  padding: 0 10px;
+  text-align: center;
+
+}
+
+.positive {
+  background-color: #65B564;
+}
+
+.negative {
+  background-color: #C64C4C;
+}

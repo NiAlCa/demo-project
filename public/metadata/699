@@ -1,0 +1,70 @@
+{
+  "name": "Rusty Robot #00699",
+  "description": "A collection of 11,111 unique Rusty Robot NFT art pieces on the IOTA network.",
+  "image": "ipfs://bafybeiacu2aagvvta6gugcpso4du6veyhbr5sqit44fi66o3qyff6dxhdq/ee7f8a46cfd73df9b02e1327e960ba4f49fd0da9dc551e41904dbede1dbad98f.png",
+  "assetId": "ee7f8a46cfd73df9b02e1327e960ba4f49fd0da9dc551e41904dbede1dbad98f",
+  "collection": "Rusty Robot Country Club",
+  "attributes": [
+    {
+      "trait_type": "background",
+      "value": "grape purple"
+    },
+    {
+      "trait_type": "body",
+      "value": "dirty black"
+    },
+    {
+      "trait_type": "button",
+      "value": "none"
+    },
+    {
+      "trait_type": "antenna",
+      "value": "worms"
+    },
+    {
+      "trait_type": "eyes",
+      "value": "wonky green"
+    },
+    {
+      "trait_type": "mouth",
+      "value": "pipe"
+    },
+    {
+      "trait_type": "face",
+      "value": "none"
+    },
+    {
+      "trait_type": "headgear",
+      "value": "safari hat"
+    },
+    {
+      "trait_type": "outfit",
+      "value": "lumberjack shirt green"
+    },
+    {
+      "trait_type": "special",
+      "value": "rainbow braces"
+    },
+    {
+      "trait_type": "accessory",
+      "value": "none"
+    },
+    {
+      "trait_type": "nft-l",
+      "value": false
+    },
+    {
+      "trait_type": "bonus",
+      "value": "none"
+    },
+    {
+      "trait_type": "wallet",
+      "value": 790
+    },
+    {
+      "trait_type": "og",
+      "value": true
+    }
+  ],
+  "external_url": "https://rustyrobot.io/collections/RRCC/699"
+}

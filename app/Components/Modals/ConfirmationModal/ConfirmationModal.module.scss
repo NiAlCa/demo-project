@@ -1,0 +1,78 @@
+@use '../../../../styles/mixins' as *;
+
+.container {
+  width: 100vw;
+  height: 90vh;
+
+  background-color: var(--background-detailed-modal);
+  z-index: 200;
+
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+  overflow-y: auto;
+
+
+  @include toRem(padding-left, 40);
+  @include toRem(padding-right, 40);
+  @include toRem(padding-top, 40);
+  @include toRem(padding-bottom, 50);
+
+  @include respond-to(sm) {
+    width: 50vw;
+    height: 90vh;
+    bottom: unset;
+
+  }
+
+  @include respond-to(lg) {
+    width: 80vw;
+    height: 65vh;
+    bottom: unset;
+
+  }
+
+  @include respond-to(xl) {
+    width: 71vw;
+    bottom: unset;
+
+  }
+
+  @include respond-to(xxl) {
+    width: 70vw;
+    bottom: unset;
+
+  }
+}
+
+.imagesContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  overflow-y: auto;
+  height: 350px;
+
+  .image {
+    border-radius: 15px;
+  }
+
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+
+  @include respond-to(sm) {
+    flex-direction: row;
+  }
+}

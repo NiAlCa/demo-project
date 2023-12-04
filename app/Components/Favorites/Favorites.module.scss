@@ -1,0 +1,77 @@
+@use '../../../styles/mixins' as *;
+
+.favorites {
+  display: flex;
+  min-width: 45%;
+  flex-direction: column;
+  @include toRem(gap, 20);
+
+  @include respond-to(md){
+    width: 30%;
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  @include toRem(gap, 10);
+
+  @include respond-to(md) {
+    justify-content: flex-start;
+  }
+}
+
+.imageContainer {
+
+  @include toRem(width, 150);
+  @include toRem(height, 150);
+
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 15px;
+
+  cursor: pointer;
+
+  .image {
+    width: 100%;
+    height: 100%;
+  }
+
+}
+
+.addNFT {
+  @include toRem(width, 150);
+  @include toRem(height, 150);
+
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.30);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  .icon {
+    width: 24px;
+    height: 24px;
+
+
+  }
+}
+
+.links {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

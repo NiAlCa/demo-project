@@ -1,0 +1,124 @@
+@use '../../../../styles/mixins' as *;
+
+.backdrop {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--backdrop-color);
+  top: 0;
+  left: 0;
+  animation: linear fadeIn 0.25s;
+  backdrop-filter: blur(20px);
+  z-index: 100;
+
+
+
+}
+
+.modalContainer {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  top: 0;
+  left: 0;
+
+  z-index: 100;
+}
+
+.modal {
+  height: 80vh;
+  width: 100vw;
+
+  padding: 25px;
+
+  background-color: var(--background-detailed-modal);
+
+  z-index: 200;
+  position: absolute;
+  bottom: 0;
+  border-radius: 15px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  @include respond-to(sm) {
+    bottom: unset;
+    width: 500px;
+    height: 500px;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  @include respond-to(sm) {
+    flex-direction: row;
+    gap: 8px;
+
+  }
+
+  h2 {
+    font-size: 36px;
+    line-height: 40px;
+  }
+
+  .highlight {
+    color: var(--orange);
+    white-space: nowrap;
+
+  }
+}
+
+.tokenBackground {
+  position: absolute;
+  z-index: -21;
+  top: 0;
+  left: 0;
+  transform: scale(1.8);
+
+  filter: sepia(2);
+}
+
+.imageContainer {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.winToken {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 200;
+}
+
+.lostToken {
+  filter: grayscale(0.9);
+}
+
+.lostText {
+  color: var(--error);
+  white-space: nowrap;
+}
+
+.winText {
+  color: var(--success);
+  white-space: nowrap;
+
+}

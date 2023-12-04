@@ -1,0 +1,97 @@
+@use '../../../styles/mixins' as *;
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 250;
+
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: var(--spacing-xs) var(--spacing-md);
+
+  @include respond-to(sm) {
+    padding: var(--spacing-xs) var(--spacing-lg);
+  }
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+
+  @include respond-to(md) {
+    gap: var(--spacing-lg);
+
+  }
+
+  .icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.twitter {
+  transform: scale(1.25)
+}
+
+.icons {
+  @include toRem(width, 30);
+  @include toRem(height, 30);
+  cursor: pointer;
+
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+
+}
+
+.iconMenu {
+  @include toRem(width, 36);
+  @include toRem(height, 27);
+  cursor: pointer;
+
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+
+}
+
+.link {
+  @include toRem(font-size, 20);
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-align: center;
+  line-height: normal;
+
+  transition: 0.2s ease-in;
+  display: none;
+
+  @include respond-to(sm) {
+    display: block
+  }
+}
+
+.logoContainer {
+  @include toRem(width, 166);
+  cursor: pointer;
+
+  @include respond-to(sm) {
+    @include toRem(width, 226);
+  }
+}
+
+.logo {
+  object-fit: contain;
+  width: 100%;
+}

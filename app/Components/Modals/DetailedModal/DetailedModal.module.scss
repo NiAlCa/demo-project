@@ -1,0 +1,192 @@
+@use '../../../../styles/mixins' as *;
+
+.container {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 80vh;
+
+  @include toRem(border-top-left-radius, 15);
+  @include toRem(border-top-right-radius, 15);
+  @include toRem(padding-top, 45);
+  @include toRem(padding-left, 10);
+  @include toRem(padding-right, 10);
+  @include toRem(padding-bottom, 10);
+
+
+  z-index: 200;
+
+
+
+  overflow-y: auto;
+  background-color: var(--background-detailed-modal);
+
+  @include toRem(gap, 20);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+
+  @include respond-to(sm) {
+    height: 80vh;
+    width: 90vw;
+    position: relative;
+    @include toRem(border-radius, 15);
+    @include toRem(padding, 10);
+
+
+  }
+
+
+  @include respond-to(md) {
+    @include toRem(padding, 30);
+
+  }
+
+  @include respond-to(lg) {
+    @include toRem(padding, 50);
+
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: 75vh;
+    width: 85vw;
+
+  }
+
+  @include respond-to(xl) {
+    height: auto;
+
+  }
+}
+
+.line {
+  position: absolute;
+  top: -25px;
+  border-radius: 5px;
+  height: 3px;
+  width: 200px;
+  background-color: gray;
+  align-self: center;
+
+  @include respond-to(sm) {
+    display: none;
+  }
+}
+
+.left {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: auto;
+
+  @include toRem(gap, 30);
+
+  @include respond-to(md) {
+    flex-direction: row;
+    @include toRem(gap, 50);
+
+  }
+
+  @include respond-to(lg) {
+    flex-direction: column;
+    @include toRem(gap, 20)
+  }
+
+  .name {
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    @include respond-to(md) {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    @include respond-to(lg) {
+      height: 100%;
+      gap: 25px;
+    }
+  }
+
+  .image {
+    position: relative;
+    @include toRem(width, 300);
+    @include toRem(height, 300);
+
+    @include respond-to(sm) {
+      @include toRem(width, 350);
+      @include toRem(height, 350);
+    }
+
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  .ogBadge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+  }
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  @include toRem(gap, 20);
+
+  @include respond-to(md) {
+    flex-direction: row;
+  }
+
+  .traitCardTop {
+    padding: 10px 20px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .7215686274509804);
+    border-radius: 10px;
+  }
+}
+
+.right {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  @include toRem(gap, 20)
+}
+
+.bottom {
+  display: grid;
+  grid-template-columns: 1fr;
+  @include toRem(gap, 20);
+
+
+  @include respond-to(sm) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include respond-to(lg) {
+    grid-template-columns: 1fr 1fr 1fr;
+
+  }
+
+  @include respond-to(xl) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    @include toRem(gap, 20)
+  }
+
+  .traitCardBottom {
+    padding: 10px 20px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .7215686274509804);
+    border-radius: 10px;
+  }
+}

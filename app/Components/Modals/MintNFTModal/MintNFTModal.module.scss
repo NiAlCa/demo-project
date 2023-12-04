@@ -1,0 +1,89 @@
+@use '../../../../styles/mixins' as *;
+
+.container {
+  width: 100vw;
+  height: 90vh;
+  bottom: 0;
+
+
+  border-radius: 15px;
+
+  background-color: hsla(0, 0%, 0%, 0.7);
+  z-index: 200;
+
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  gap: 20px;
+
+
+
+  @include toRem(padding-left, 40);
+  @include toRem(padding-right, 40);
+  @include toRem(padding-top, 40);
+  @include toRem(padding-bottom, 50);
+
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+
+  @include respond-to(sm) {
+    gap: 10px;
+    border-radius: 15px;
+
+    width: 500px;
+    height: auto;
+
+    bottom: unset;
+  }
+
+  @include respond-to(md) {}
+
+}
+
+.gifContainer {
+  @include toRem(width, 300);
+  @include toRem(height, 300);
+
+
+  position: relative;
+}
+
+.mintContainer {
+  width: 100%;
+  text-align: center;
+
+  margin-top: 40px;
+
+  .nftRemaining {
+    margin-top: 20px;
+    opacity: 0.7;
+    color: #FFF;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+  }
+}
+
+.gif {
+  border-radius: 15px;
+
+}
+.soldOutgif {
+  opacity: 0.5;
+  border-radius: 15px;
+
+}
+
+.soldOut {
+  position: absolute;
+  width: 600px;
+  height: 180px;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,72 @@
+@use '../../../styles/mixins' as *;
+
+.container {
+  height: auto;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.30);
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 10px 20px;
+
+
+  @include respond-to(md) {
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: row;
+
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+
+}
+
+.arrowContainer {
+
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  z-index: 12;
+  transform: translateX(-50%);
+
+  width: 48px;
+  height: 48px;
+
+
+  border-radius: 20px 20px 0px 0px;
+  background: rgba(0, 0, 0, 0.30);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  .arrow {
+    transform: scale(1.8);
+
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.open {
+  top: var(--spacing-xl);
+
+  transform: rotate(180deg) translateX(50%);
+}
+
+.badges {
+
+  display: none;
+  width: auto;
+  padding-left: var(--spacing-md);
+
+  @include respond-to(md) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    width: 40vw;
+  }
+}

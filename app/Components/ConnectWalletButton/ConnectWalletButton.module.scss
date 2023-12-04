@@ -1,0 +1,29 @@
+@use '../../../styles/mixins' as *;
+
+
+.button {
+  display: flex;
+  @include toRem(width, 240);
+  @include toRem(height, 40);
+  @include toRem(padding, 10 46 10 47);
+  // padding: 10px 46px 10px 47px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  @include toRem(border-radius, 8);
+  background: #E99922;
+
+  text-align: center;
+  font-family: Inter;
+  @include toRem(font-size, 14);
+  font-style: normal;
+  font-weight: 700;
+  @include toRem(line-height, 20);
+  @include toRem(letter-spacing, 1);
+
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    background: hsla(36, 82%, 52%, 0.5);
+  }
+}

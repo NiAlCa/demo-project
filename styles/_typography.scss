@@ -1,0 +1,13 @@
+.menu-title {
+  color: #FFF;
+
+  text-align: right;
+  font-feature-settings: 'salt' on, 'liga' off;
+  font-family: Inter;
+  @include toRem(font-size, 24);
+  font-style: normal;
+  font-weight: 800;
+  @include toRem(line-height, 27);
+
+  /* 112.5% */
+}

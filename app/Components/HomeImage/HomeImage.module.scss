@@ -1,0 +1,82 @@
+@use '../../../styles/mixins' as *;
+
+.image {
+  position: absolute;
+  object-fit: contain;
+  bottom: 0;
+
+  opacity: 0;
+}
+
+.left {
+  display: none;
+
+  @include respond-to(md) {
+    display: block;
+    z-index: 1;
+    transform: translateX(-33vw) translateY(200px);
+  }
+
+  @include respond-to(xl) {
+    transform: translateX(-33vw) translateY(0px);
+  }
+
+}
+
+.midLeft {
+  z-index: 2;
+  transform: translateX(-35vw) translateY(200px);
+  display: none;
+
+  @include respond-to(md) {
+    display: block;
+    transform: translateX(-18vw) translateY(200px);
+    z-index: 2;
+  }
+
+  @include respond-to(xl) {
+    transform: translateX(-18vw) translateY(0px);
+  }
+}
+
+.mid {
+  z-index: 3;
+  transform: translateY(200px) scale(0.7);
+
+  @include respond-to(md){
+    transform: scale(1) translateY(200px);
+  }
+  @include respond-to(xl) {
+    transform: translateY(0px);
+  }
+}
+
+.midRight {
+  transform: translateX(35vw) translateY(200px);
+  z-index: 2;
+  display: none;
+
+  @include respond-to(md) {
+    display: block;
+    transform: translateX(18vw) translateY(200px);
+    z-index: 2;
+  }
+
+  @include respond-to(xl) {
+    transform: translateX(18vw) translateY(0px);
+  }
+}
+
+.right {
+  display: none;
+
+  @include respond-to(md) {
+    display: block;
+    z-index: 1;
+    transform: translateX(33vw) translateY(200px);
+  }
+
+  @include respond-to(xl) {
+    transform: translateX(33vw) translateY(0px);
+  }
+}

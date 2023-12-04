@@ -1,0 +1,58 @@
+@use '../../../../styles/mixins' as *;
+
+.container {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 80vh;
+
+  @include toRem(border-top-left-radius, 15);
+  @include toRem(border-top-right-radius, 15);
+  @include toRem(padding-top, 45);
+  @include toRem(padding-left, 10);
+  @include toRem(padding-right, 10);
+  @include toRem(padding-bottom, 10);
+
+
+  z-index: 200;
+
+
+
+  overflow-y: auto;
+  background-color: var(--background-detailed-modal);
+
+  @include toRem(gap, 20);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+
+  @include respond-to(sm) {
+    height: 80vh;
+    width: 90vw;
+    position: relative;
+    @include toRem(border-radius, 15);
+    @include toRem(padding, 10);
+
+
+  }
+
+
+  @include respond-to(md) {
+    @include toRem(padding, 30);
+
+  }
+
+  @include respond-to(lg) {
+    @include toRem(padding, 50);
+
+    align-items: flex-start;
+    justify-content: space-between;
+    height: 75vh;
+    width: auto;
+    max-width: 75vw;
+
+  }
+
+}

@@ -1,0 +1,21 @@
+@use '../../../styles/mixins' as *;
+
+
+.baseContainer {
+  width: 100%;
+  height: auto;
+  
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  @include toRem(gap, 30);
+  @include toRem(padding-bottom, 50);
+
+  @include respond-to(sm) {
+    justify-content: start;
+  }
+
+}

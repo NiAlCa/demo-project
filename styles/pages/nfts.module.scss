@@ -1,0 +1,43 @@
+@use '../mixins' as *;
+
+.dashboard {
+  position: relative;
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  padding-top: var(--spacing-xl);
+  @include toRem(padding-left, 60);
+  @include toRem(padding-left, 60);
+  @include toRem(padding-bottom, 100);
+
+  min-height: 100vh;
+
+  transition: 0.2s ease-in;
+
+  @include respond-to(sm) {
+    padding-top: var(--spacing-xxl);
+
+  }
+
+  @include respond-to(md) {
+    width: 100%;
+    height: auto;
+  }
+
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+
+  cursor: pointer;
+
+  @include respond-to(lg) {
+    margin-top: 20px;
+  }
+}

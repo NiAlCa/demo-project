@@ -1,0 +1,12 @@
+/**
+ * TESTNET
+ */
+export const RPC_ENDPOINT =
+  "https://json-rpc.evm.testnet.shimmer.network/";
+export const CHAIN_ID = 1073;
+export const MARKETPLACE_CONTRACT_ADDRESS_V2 =
+  "0xa8A76451FAF223D38492595f5a9DcF5b1d9fD6FB";
+export const NFT_CONTRACT_ADDRESS_V2 =
+  "0x6A9997422B7A021084a1477D5ce4570A0f96366B";
+export const RUST_TOKEN_CONTRACT_ADDRESS_V2 =
+  "0xEe7908Be6B6Fc2303dB48EAACF3503CDb90Bc81d";

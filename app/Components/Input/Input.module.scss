@@ -1,0 +1,136 @@
+@use '../../../styles/mixins' as *;
+
+.input {
+  border: 1px solid white;
+  border-radius: 15px;
+  color: white;
+  outline: none;
+
+  width: 100%;
+  background: transparent;
+  font-family: 'Inter';
+  padding-left: 20px;
+  @include toRem(font-size, 24);
+  @include toRem(line-height, 32);
+  @include toRem(letter-spacing, 2.88);
+  font-weight: 800;
+
+
+  @include respond-to(md) {
+    width: 40vw;
+    @include toRem(font-size, 42);
+    @include toRem(line-height, 42);
+    @include toRem(letter-spacing, 3.24);
+    font-weight: 800;
+  }
+
+  @include respond-to(lg) {
+    @include toRem(font-size, 48);
+    @include toRem(line-height, 48);
+    @include toRem(letter-spacing, 3.84);
+    font-weight: 800;
+    transform: translateY(-5px);
+
+  }
+
+  &::placeholder {
+    color: white;
+    @include toRem(font-size, 24);
+    @include toRem(line-height, 36);
+    @include toRem(letter-spacing, 2.88);
+    font-weight: 800;
+
+
+    @include respond-to(md) {
+      @include toRem(font-size, 48);
+      @include toRem(line-height, 48);
+      @include toRem(letter-spacing, 3.84);
+      font-weight: 800;
+    }
+
+    border: 0px solid transparent;
+
+  }
+
+  &:focus {
+    border: 1px solid white;
+  }
+}
+
+.label {
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.number {
+  border: 0px solid white;
+  border-radius: 15px;
+  color: white;
+  outline: none;
+  padding: 4px;
+  text-align: center;
+
+
+  width: 275px;
+  background: rgba(0, 0, 0, 0.3);
+  font-family: 'Inter';
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  @include toRem(font-size, 24);
+  @include toRem(line-height, 32);
+  @include toRem(letter-spacing, 2.88);
+  font-weight: 800;
+
+
+  @include respond-to(md) {
+    @include toRem(font-size, 24);
+    @include toRem(line-height, 24);
+    @include toRem(letter-spacing, 1.24);
+    font-weight: 800;
+  }
+
+  @include respond-to(lg) {
+    @include toRem(font-size, 28);
+    @include toRem(line-height, 28);
+    @include toRem(letter-spacing, 1);
+    font-weight: 800;
+  }
+
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    @include toRem(font-size, 24);
+    @include toRem(line-height, 24);
+    @include toRem(letter-spacing, 2.88);
+    font-weight: 800;
+
+
+    @include respond-to(md) {
+      @include toRem(font-size, 28);
+      @include toRem(line-height, 28);
+      @include toRem(letter-spacing, 1);
+      font-weight: 800;
+    }
+
+    border: 0px solid transparent;
+
+  }
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+
+    display: none;
+  }
+}
+
+.max {
+  font-size: 10px;
+  align-self: flex-end;
+  padding-right: 15px;
+}

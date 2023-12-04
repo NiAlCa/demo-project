@@ -1,0 +1,25 @@
+@use '../../../../styles/mixins' as *;
+
+.modal {
+  width: 100vw;
+  height: auto;
+
+  background-color: var(--background-color-menu);
+
+  backdrop-filter: blur(10px);
+  position: absolute;
+  z-index: 10;
+
+  right: -20px;
+  bottom: 0;
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  @include respond-to(sm) {
+
+    width: 45vw;
+  }
+}

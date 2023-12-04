@@ -1,0 +1,73 @@
+@use '../../../styles/mixins' as *;
+
+.userInfo {
+  display: flex;
+  gap: 10px;
+  @include toRem(margin-bottom, 20);
+  position: relative;
+
+  @include respond-to(md) {
+    margin-bottom: 0;
+  }
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  white-space: wrap;
+
+  @include respond-to(sm) {
+    width: 40vw;
+  }
+
+  @include respond-to(md) {
+    @include toRem(padding-bottom, 60);
+    justify-content: flex-end;
+
+
+  }
+}
+
+.icon {
+
+  width: 36px;
+  height: 36px;
+
+  @include respond-to(md) {
+    width: 48px;
+    height: 48px;
+  }
+
+}
+
+.userName {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  @include toRem(gap, 20);
+
+  .icon {
+    @include toRem(width, 32);
+    @include toRem(height, 32);
+  }
+}
+
+.editProfile {
+  opacity: 0.6;
+
+  cursor: pointer;
+
+
+  &:hover {
+    opacity: 1;
+  }
+}

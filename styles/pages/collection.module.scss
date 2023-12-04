@@ -1,0 +1,84 @@
+@use '../mixins' as *;
+
+.sort {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column-reverse;
+
+  @include toRem(gap, 20);
+  @include toRem(padding-top, 50);
+
+  @include respond-to(sm) {
+    flex-direction: row;
+  }
+}
+
+.buttons {
+  display: flex;
+  @include toRem(gap, 5);
+}
+
+.button {
+  @include toRem(padding-left, 20);
+  @include toRem(padding-right, 20);
+  @include toRem(padding-top, 10);
+  @include toRem(padding-bottom, 10);
+
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease-in;
+  @include toRem(border-radius, 5);
+
+}
+
+.active {
+  background-color: var(--blue);
+  color: var(--text-color-dark);
+
+}
+
+.input {
+  @include toRem(padding-left, 8);
+  @include toRem(padding-right, 20);
+  @include toRem(padding-top, 10);
+  @include toRem(padding-bottom, 10);
+
+  background-color: var(--neutrals-dark);
+
+  color: var(--neutrals-light);
+
+
+  font-family: 'Inter', sans-serif;
+  @include toRem(font-size, 18);
+
+  border: 1px solid var(--neutrals-light);
+  @include toRem(border-radius, 5);
+  outline: none;
+
+  &::placeholder {
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+
+  @include respond-to(sm) {
+    flex-direction: row;
+  }
+
+  .loading {
+    position: absolute;
+    top: -25px;
+
+    @include respond-to(sm) {
+      display: block;
+    }
+  }
+}

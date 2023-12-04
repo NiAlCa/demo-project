@@ -1,0 +1,57 @@
+.backdrop {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--backdrop-color);
+  top: 0;
+  left: 0;
+  animation: linear fadeIn 0.25s;
+  backdrop-filter: blur(20px);
+  z-index: 100;
+}
+
+.modalContainer {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  top: 0;
+  left: 0;
+
+  z-index: 100;
+}
+
+.modal {
+  width: 700px;
+  height: auto;
+
+  padding: 25px;
+
+  background-color: var(--background-detailed-modal);
+  z-index: 200;
+  border-radius: 15px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.text {
+  display: flex;
+  align-items: flex-start;
+}
+
+.checkbox {
+  margin-top: 6px;
+}

@@ -1,0 +1,16 @@
+@use '../../../styles/mixins' as *;
+
+.baseSection {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  @include toRem(gap, 50);
+  padding: 0 2vw 5vw 2vw;
+
+
+  @include respond-to(md) {
+    width: 100%;
+
+    padding: 0 5vw 2vw 5vw;
+  }
+}

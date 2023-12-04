@@ -1,0 +1,93 @@
+@use '../../../styles/mixins' as *;
+
+.menu {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  z-index: 10;
+  transform: translateX(-50%);
+
+  // overflow-y: auto;
+
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  @include toRem(padding-top, 60);
+  @include toRem(padding-left, 20);
+  @include toRem(padding-right, 20);
+  @include toRem(padding-bottom, 20);
+
+  height: calc(100vh - var(--spacing-xl));
+
+  @include respond-to(sm) {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    @include toRem(padding-top, 60);
+    @include toRem(padding-bottom, 0);
+    padding-left: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
+
+  }
+
+  @include respond-to(md) {
+    @include toRem(padding-top, 60);
+  }
+
+  @include respond-to(lg) {
+    @include toRem(padding-top, 100);
+  }
+}
+
+.favorites {
+  display: none;
+  overflow-y: auto;
+
+  @include respond-to(sm) {
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 50%;
+  }
+}
+
+.links {
+
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+  width: 100%;
+
+  @include toRem(gap, 20);
+
+  @include respond-to(sm) {
+    width: auto;
+  }
+
+  @include respond-to(md) {
+    @include toRem(gap, 30);
+
+  }
+
+  .link {
+
+    @include toRem(padding, 5);
+    transition: 0.3s ease-in;
+
+
+    cursor: pointer;
+
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.5);
+      @include toRem(padding-right, 10);
+    }
+  }
+}
