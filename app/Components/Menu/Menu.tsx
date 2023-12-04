@@ -54,6 +54,16 @@ const Menu = ({ isMetamaskInstalled }: IMenuProps) => {
             >
               Link a Dev
             </h2>
+            {wallet && (
+              <h2
+                className={styles.link}
+                onClick={() => {
+                  router.push("/dashboard"), setIsMenuOpen(false);
+                }}
+              >
+                Dashboard
+              </h2>
+            )}
             <br />
             {!wallet && isMetamaskInstalled && (
               <ConnectWalletButton
