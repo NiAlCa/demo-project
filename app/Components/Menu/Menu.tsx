@@ -7,7 +7,6 @@ import { useOutsideAlerter } from "../../hooks/useOutsideAlertes";
 import { useRouter } from "next/router";
 import { RiCloseLine } from "react-icons/ri";
 import { useStoreRehydrated } from "easy-peasy";
-import axios from "axios";
 import PriceTracker from "../PriceTracker/PriceTracker";
 import {
   MARKETPLACE_CONTRACT_ADDRESS_V2,

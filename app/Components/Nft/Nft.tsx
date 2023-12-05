@@ -2,18 +2,11 @@ import React from "react";
 import { INFT } from "./Nft.types";
 import styles from "./Nft.module.scss";
 import Image from "next/image";
-import { useStoreActions } from "../../../store";
 const Nft = ({ name, image, rarity, onClick }: INFT) => {
   const splitImage = image.split("//");
 
-  const { setIsDetailedModalOpen } = useStoreActions((actions) => actions.ui);
-
-  function handleModalOpen() {
-    onClick();
-    setIsDetailedModalOpen(true);
-  }
   return (
-    <div className={styles.container} onClick={handleModalOpen}>
+    <div className={styles.container} onClick={onClick}>
       <div className={styles.imageContainer}>
         <Image
           src={`https://rrcc.mypinata.cloud/ipfs/${splitImage[1]}`}
