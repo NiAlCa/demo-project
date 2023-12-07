@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import mapboxgl, { Map as MapboxMap, MapboxGeoJSONFeature } from 'mapbox-gl';
+import styles from "../../../styles/pages/mapComponent.module.scss";
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoid3MyMiIsImEiOiJjbHByajZnbHowY3ZxMmpxY3NvdGZuNWtrIn0.JMyy9rU1aVlztcrAxXzALg';
@@ -14,10 +15,11 @@ const Map: React.FC = () => {
     if (!map) {
       const mapInstance = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
+        style: 'mapbox://styles/mapbox/dark-v10',
         center: [lng, lat],
         zoom: zoom,
       });
+      mapInstance.addControl(new mapboxgl.NavigationControl());
 
       mapInstance.on('load', () => {
         mapInstance.loadImage('https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png', (error, image) => {
@@ -39,7 +41,7 @@ const Map: React.FC = () => {
               'source': 'points',
               'layout': {
                 'icon-image': 'custom-marker',
-                'icon-size': 0.05,
+                'icon-size': 0.50,
               },
             });
 
@@ -77,8 +79,8 @@ const Map: React.FC = () => {
   }, [map, lng, lat, zoom]);
 
   return (
-    <div>
-      <div id="map" style={{ width: '100%', height: '500px' }}></div>
+    <div className={styles.container}>
+      <div id="map" style={{ width: '100vw', height: '100vh' }}></div>
     </div>
   );
 };
