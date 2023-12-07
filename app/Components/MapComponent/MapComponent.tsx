@@ -80,7 +80,7 @@ const Map: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <div id="map" style={{ width: '100vw', height: '100vh' }}></div>
+      <div id="map" style={{ width: '100vw', height: '85vh' , alignSelf: 'flex-start'}}></div>
     </div>
   );
 };

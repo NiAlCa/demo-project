@@ -11,7 +11,6 @@ const Map = () => {
   return (
     <BasePage backgroundColor="--background-color">
       <div>
-        <h1>Map Page</h1>
         <MapComponent />
       </div>
     </BasePage>
