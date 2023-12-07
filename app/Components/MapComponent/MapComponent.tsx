@@ -1,28 +1,86 @@
-import React from 'react';
-import ReactMapGL, { NavigationControl } from 'react-map-gl';
+import React, { useState, useEffect } from 'react';
+import mapboxgl, { Map as MapboxMap, MapboxGeoJSONFeature } from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
-const MapComponent: React.FC = () => {
-  const [viewport, setViewport] = React.useState({
-    width: '100%',
-    height: '100%',
-    latitude: 0,
-    longitude: 0,
-    zoom: 1,
-  });
+mapboxgl.accessToken = 'pk.eyJ1Ijoid3MyMiIsImEiOiJjbHByajZnbHowY3ZxMmpxY3NvdGZuNWtrIn0.JMyy9rU1aVlztcrAxXzALg';
+
+const Map: React.FC = () => {
+  const [lng, setLng] = useState<number>(13.40);
+  const [lat, setLat] = useState<number>(52.52);
+  const [zoom, setZoom] = useState<number>(9);
+  const [map, setMap] = useState<MapboxMap | null>(null);
+
+  useEffect(() => {
+    if (!map) {
+      const mapInstance = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [lng, lat],
+        zoom: zoom,
+      });
+
+      mapInstance.on('load', () => {
+        mapInstance.loadImage('https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png', (error, image) => {
+          if (error) throw error;
+          if (image) {
+            mapInstance.addImage('custom-marker', image);
+
+            mapInstance.addSource('points', {
+              'type': 'geojson',
+              'data': {
+                'type': 'FeatureCollection',
+                'features': [] as MapboxGeoJSONFeature[],
+              },
+            });
+
+            mapInstance.addLayer({
+              'id': 'points',
+              'type': 'symbol',
+              'source': 'points',
+              'layout': {
+                'icon-image': 'custom-marker',
+                'icon-size': 0.05,
+              },
+            });
+
+            mapInstance.on('click', (e) => {
+              const newCoordinate = [e.lngLat.lng, e.lngLat.lat];
+              const geojson: MapboxGeoJSONFeature = {
+                'type': 'Feature',
+                'geometry': {
+                  'type': 'Point',
+                  'coordinates': newCoordinate,
+                },
+                'properties': {},
+                'layer': {
+                  'id': 'points',
+                  'type': 'symbol',
+                  'source': 'points',
+                },
+                'source': 'points',
+                'sourceLayer': 'points',
+                'state': {},
+              };
+
+              const source = mapInstance.getSource('points') as mapboxgl.GeoJSONSource;
+              if (source) {
+                source.setData({ type: 'FeatureCollection', features: [geojson] });
+              }
+              console.log(newCoordinate);
+            });
+          }
+        });
+      });
+
+      setMap(mapInstance);
+    }
+  }, [map, lng, lat, zoom]);
 
   return (
-    <ReactMapGL
-      {...viewport}
-      mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
-      onViewportChange={(newViewport) => setViewport(newViewport)}
-      mapStyle="mapbox://styles/mapbox/streets-v11"
-    >
-      {/* Puedes agregar marcadores, polígonos u otros elementos aquí */}
-      <div style={{ position: 'absolute', right: 0 }}>
-        <NavigationControl />
-      </div>
-    </ReactMapGL>
+    <div>
+      <div id="map" style={{ width: '100%', height: '500px' }}></div>
+    </div>
   );
 };
 
-export default MapComponent;
+export default Map;
