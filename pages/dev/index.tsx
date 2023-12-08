@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import BasePage from "../../app/Components/BasePage/BasePage";
 import styles from "../../styles/pages/dev.module.scss";
 import Button from "../../app/Components/Button/Button";
 import { toast } from "react-toastify";
+import { FavoriteSelect } from "../../app/Components/FavoriteSelect/FavoriteSelect";
 const Dev = () => {
+
+   type NFT = {
+    name: string;
+    description: string;
+    image: string;
+    assetId: string;
+    collection: string;
+    external_url: string;
+  };
+
+  const [selectedFavorites, setSelectedFavorites] = useState<NFT[]>([]);
+
   return (
     <BasePage backgroundColor="--background-color">
       <div className={styles.container}>
@@ -43,6 +56,13 @@ const Dev = () => {
           type={"orange"}
           size={"large"}
         />
+
+<FavoriteSelect
+        selectedFavorites={selectedFavorites}
+        setSelectedFavorites={setSelectedFavorites}
+      />
+
+
       </div>
     </BasePage>
   );

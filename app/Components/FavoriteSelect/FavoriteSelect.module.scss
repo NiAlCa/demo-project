@@ -1,0 +1,13 @@
+#img{
+    width: 200px;
+}
+
+.contenetor{
+    display: flex;
+    flex-wrap: wrap;
+
+    .contenetor{
+        display: flex;
+        flex-direction: column;
+    }
+}
