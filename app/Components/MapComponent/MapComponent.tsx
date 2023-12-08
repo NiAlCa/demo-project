@@ -1,7 +1,10 @@
-import React, { useState, useEffect, SetStateAction, Dispatch } from 'react';
+import React, { useState, useEffect } from 'react';
 import mapboxgl, { Map as MapboxMap, MapboxGeoJSONFeature } from 'mapbox-gl';
-import styles from "../../../styles/pages/mapComponent.module.scss";
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+
+import styles from "../../../styles/pages/mapComponent.module.scss";
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoid3MyMiIsImEiOiJjbHByajZnbHowY3ZxMmpxY3NvdGZuNWtrIn0.JMyy9rU1aVlztcrAxXzALg';
 
@@ -47,34 +50,33 @@ const Map: React.FC = () => {
             });
 
             mapInstance.on('click', (e) => {
-  const newCoordinate = [e.lngLat.lng, e.lngLat.lat];
-  setLocations((prevLocations: [number, number][]) => [...prevLocations, newCoordinate] as [number, number][]);
+              const newCoordinate = [e.lngLat.lng, e.lngLat.lat];
+              setLocations((prevLocations: [number, number][]) => [...prevLocations, newCoordinate] as [number, number][]);
 
-  const geojson: MapboxGeoJSONFeature = {
-    'type': 'Feature',
-    'geometry': {
-      'type': 'Point',
-      'coordinates': newCoordinate,
-    },
-    'properties': {},
-    'layer': {
-      'id': 'points',
-      'type': 'symbol',
-      'source': 'points',
-    },
-    'source': 'points',
-    'sourceLayer': 'points',
-    'state': {},
-  };
+              const geojson: MapboxGeoJSONFeature = {
+                'type': 'Feature',
+                'geometry': {
+                  'type': 'Point',
+                  'coordinates': newCoordinate,
+                },
+                'properties': {},
+                'layer': {
+                  'id': 'points',
+                  'type': 'symbol',
+                  'source': 'points',
+                },
+                'source': 'points',
+                'sourceLayer': 'points',
+                'state': {},
+              };
 
-  const source = mapInstance.getSource('points') as mapboxgl.GeoJSONSource;
-  if (source) {
-    source.setData({ type: 'FeatureCollection', features: [geojson] });
-  }
+              const source = mapInstance.getSource('points') as mapboxgl.GeoJSONSource;
+              if (source) {
+                source.setData({ type: 'FeatureCollection', features: [geojson] });
+              }
 
-  console.log(newCoordinate);
-});
-
+              console.log(newCoordinate);
+            });
           }
         });
       });
@@ -83,16 +85,63 @@ const Map: React.FC = () => {
     }
   }, [map, lng, lat, zoom]);
 
+  useEffect(() => {
+    const handleSearch = async (query: string) => {
+      try {
+        const response = await fetch(
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json?access_token=${mapboxgl.accessToken}`
+        );
+
+        const data = await response.json();
+
+        if (data.features && data.features.length > 0) {
+          const coordinates = data.features[0].center;
+          setLng(coordinates[0]);
+          setLat(coordinates[1]);
+          setZoom(12);
+        } else {
+          console.log('No se encontraron resultados para la búsqueda.');
+        }
+      } catch (error) {
+        console.error('Error en la búsqueda:', error);
+      }
+    };
+
+    const initializeGeocoder = () => {
+      if (map) {
+        const geocoder = new MapboxGeocoder({
+          accessToken: mapboxgl.accessToken,
+          mapboxgl: mapboxgl,
+          placeholder: 'Buscar por país, ciudad, barrio, zona...',
+        });
+
+        document.getElementById('geocoder-container')?.appendChild(geocoder.onAdd(map));
+
+        geocoder.on('result', (event) => {
+          const { center } = event.result.geometry;
+          setLng(center[0]);
+          setLat(center[1]);
+          setZoom(12);
+        });
+      }
+    };
+
+    initializeGeocoder();
+  }, [map]);
+
   return (
     <div className={styles.container}>
-      <div id="map" style={{ width: '100vw', height: '85vh', alignSelf: 'flex-start' }}></div>
-      <div>
+      <div id="map" style={{ width: '80vw', height: '85vh', alignSelf: 'flex-start' }}></div>
+      <div className={styles.geocontainers}>
+      <div id="geocoder-container"></div>
+      <div className={styles.ubicaciones}>
         <h2>Ubicaciones guardadas:</h2>
         <ul>
           {locations.map((location, index) => (
             <li key={index}>{`Latitud: ${location[1]}, Longitud: ${location[0]}`}</li>
           ))}
         </ul>
+        </div>
       </div>
     </div>
   );

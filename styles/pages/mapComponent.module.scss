@@ -10,3 +10,15 @@
     width: 100%;
     height: 100%;
   }
+  .geocontainers{
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 100vh;
+  gap: 20px;
+}
+
+  .ubicaciones{
+    background-color: aliceblue;
+    color: black;
+  }
