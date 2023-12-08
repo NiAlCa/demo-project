@@ -4,6 +4,7 @@ import styles from "../../styles/pages/dev.module.scss";
 import Button from "../../app/Components/Button/Button";
 import { toast } from "react-toastify";
 import { FavoriteSelect } from "../../app/Components/FavoriteSelect/FavoriteSelect";
+import Banner from "../../app/Components/Banner/Banner";
 const Dev = () => {
 
    type NFT = {
@@ -60,6 +61,10 @@ const Dev = () => {
 <FavoriteSelect
         selectedFavorites={selectedFavorites}
         setSelectedFavorites={setSelectedFavorites}
+      />
+
+      <Banner
+       selectedFavorites={selectedFavorites}
       />
 
 

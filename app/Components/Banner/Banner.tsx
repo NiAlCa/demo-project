@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import html2canvas from 'html2canvas';
-import { NFT } from '../../data/LastSongData.mock';
 import styles from './Banner.module.scss';
+import Image from 'next/image';
 
+
+type NFT = {
+  name: string;
+  description: string;
+  image: string;
+  assetId: string;
+  collection: string;
+  external_url: string;
+};
 interface BannerProps {
   selectedFavorites: NFT[];
 }
@@ -12,7 +21,6 @@ const Banner: React.FC<BannerProps> = ({ selectedFavorites }) => {
 
   useEffect(() => {
     if (imagesLoaded === selectedFavorites.length) {
-      // Si todas las imágenes están cargadas, se podría generar el canvas aquí si se desea
     }
   }, [imagesLoaded, selectedFavorites.length]);
 
@@ -61,6 +69,10 @@ const Banner: React.FC<BannerProps> = ({ selectedFavorites }) => {
     }
   };
 
+  const ipfsToHttpUrl = (ipfsUrl: string) => {
+    return ipfsUrl.replace(/^ipfs:\/\/(.+)/, 'https://ipfs.io/ipfs/$1');
+  };
+
   return (
     <div className={styles.bannerContainer}>
       <div id="banner" className={styles.banner} style={{ 
@@ -70,13 +82,18 @@ const Banner: React.FC<BannerProps> = ({ selectedFavorites }) => {
       }}>
         {selectedFavorites.map((nft) => (
           <div key={nft.assetId} className={styles.favoriteItem}>
-            <img
-              src={nft.image}
-              alt={nft.name}
-              className={styles.favoriteImage}
+
+            <Image
+               src={ipfsToHttpUrl(nft.image)} 
+               alt={nft.name}
+               className={styles.favoriteImage}
+              width={500} 
+              height={500} 
               onLoad={onImageLoad}
               crossOrigin="anonymous"
             />
+
+   
           </div>
         ))}
       </div>
