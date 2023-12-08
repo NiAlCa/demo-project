@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, SetStateAction, Dispatch } from 'react';
 import mapboxgl, { Map as MapboxMap, MapboxGeoJSONFeature } from 'mapbox-gl';
 import styles from "../../../styles/pages/mapComponent.module.scss";
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -10,6 +10,7 @@ const Map: React.FC = () => {
   const [lat, setLat] = useState<number>(52.52);
   const [zoom, setZoom] = useState<number>(9);
   const [map, setMap] = useState<MapboxMap | null>(null);
+  const [locations, setLocations] = useState<Array<[number, number]>>([]);
 
   useEffect(() => {
     if (!map) {
@@ -46,30 +47,34 @@ const Map: React.FC = () => {
             });
 
             mapInstance.on('click', (e) => {
-              const newCoordinate = [e.lngLat.lng, e.lngLat.lat];
-              const geojson: MapboxGeoJSONFeature = {
-                'type': 'Feature',
-                'geometry': {
-                  'type': 'Point',
-                  'coordinates': newCoordinate,
-                },
-                'properties': {},
-                'layer': {
-                  'id': 'points',
-                  'type': 'symbol',
-                  'source': 'points',
-                },
-                'source': 'points',
-                'sourceLayer': 'points',
-                'state': {},
-              };
+  const newCoordinate = [e.lngLat.lng, e.lngLat.lat];
+  setLocations((prevLocations: [number, number][]) => [...prevLocations, newCoordinate] as [number, number][]);
 
-              const source = mapInstance.getSource('points') as mapboxgl.GeoJSONSource;
-              if (source) {
-                source.setData({ type: 'FeatureCollection', features: [geojson] });
-              }
-              console.log(newCoordinate);
-            });
+  const geojson: MapboxGeoJSONFeature = {
+    'type': 'Feature',
+    'geometry': {
+      'type': 'Point',
+      'coordinates': newCoordinate,
+    },
+    'properties': {},
+    'layer': {
+      'id': 'points',
+      'type': 'symbol',
+      'source': 'points',
+    },
+    'source': 'points',
+    'sourceLayer': 'points',
+    'state': {},
+  };
+
+  const source = mapInstance.getSource('points') as mapboxgl.GeoJSONSource;
+  if (source) {
+    source.setData({ type: 'FeatureCollection', features: [geojson] });
+  }
+
+  console.log(newCoordinate);
+});
+
           }
         });
       });
@@ -80,7 +85,15 @@ const Map: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <div id="map" style={{ width: '100vw', height: '85vh' , alignSelf: 'flex-start'}}></div>
+      <div id="map" style={{ width: '100vw', height: '85vh', alignSelf: 'flex-start' }}></div>
+      <div>
+        <h2>Ubicaciones guardadas:</h2>
+        <ul>
+          {locations.map((location, index) => (
+            <li key={index}>{`Latitud: ${location[1]}, Longitud: ${location[0]}`}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
