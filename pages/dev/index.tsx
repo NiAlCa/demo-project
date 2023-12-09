@@ -6,8 +6,7 @@ import { toast } from "react-toastify";
 import { FavoriteSelect } from "../../app/Components/FavoriteSelect/FavoriteSelect";
 import Banner from "../../app/Components/Banner/Banner";
 const Dev = () => {
-
-   type NFT = {
+  type NFT = {
     name: string;
     description: string;
     image: string;
@@ -58,16 +57,12 @@ const Dev = () => {
           size={"large"}
         />
 
-<FavoriteSelect
-        selectedFavorites={selectedFavorites}
-        setSelectedFavorites={setSelectedFavorites}
-      />
+        <FavoriteSelect
+          selectedFavorites={selectedFavorites}
+          setSelectedFavorites={setSelectedFavorites}
+        />
 
-      <Banner
-       selectedFavorites={selectedFavorites}
-      />
-
-
+        <Banner selectedFavorites={selectedFavorites} />
       </div>
     </BasePage>
   );
