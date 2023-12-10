@@ -1,6 +1,7 @@
 import React from "react";
 import MapComponent from "../../app/Components/MapComponent/MapComponent";
 import BasePage from "../../app/Components/BasePage/BasePage";
+import BaseSection from "../../app/Components/BaseSection/BaseSection";
 
 
 
@@ -10,9 +11,12 @@ import BasePage from "../../app/Components/BasePage/BasePage";
 const Map = () => {
   return (
     <BasePage backgroundColor="--background-color">
-      <div>
+      <BaseSection>
+      
         <MapComponent />
-      </div>
+
+      
+      </BaseSection>
     </BasePage>
   );
 };
