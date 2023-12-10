@@ -5,16 +5,20 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 interface MapSearchHookProps {
   map: MapboxMap | null;
-  setLocations: (newLocations: [number, number][]) => void;
+  setLocations: React.Dispatch<React.SetStateAction<{ id: number; user: string; coordinates: [number, number]; }[]>>;
 }
 
-export const useMapInitialization = (setLocations: (newLocations: [number, number][]) => void) => {
+export const useMapInitialization = (setLocations: React.Dispatch<React.SetStateAction<{ id: number; user: string; coordinates: [number, number]; }[]>>) => {
   const [map, setMap] = useState<MapboxMap | null>(null);
 
   useEffect(() => {
     if (!map) {
       const setLocationsState = (newLocations: [number, number][]) => {
-        setLocations([...newLocations] as [number, number][]);
+        setLocations(newLocations.map((coordinates, index) => ({
+          id: index + 1, // Assuming each location has a unique ID
+          user: 'SomeUser', // You may want to replace this with the actual user
+          coordinates,
+        })));
       };
 
       const mapInstance = new mapboxgl.Map({
@@ -52,7 +56,7 @@ export const useMapInitialization = (setLocations: (newLocations: [number, numbe
 
             mapInstance.on('click', (e) => {
               const newCoordinate = [e.lngLat.lng, e.lngLat.lat];
-              setLocationsState([[newCoordinate[0], newCoordinate[1]]] as [number, number][]);
+              setLocationsState([newCoordinate] as [number, number][]);
 
               const geojson: MapboxGeoJSONFeature = {
                 'type': 'Feature',
@@ -108,7 +112,7 @@ export const useMapSearch = ({ map, setLocations }: MapSearchHookProps) => {
           setLng(coordinates[0]);
           setLat(coordinates[1]);
           setZoom(12);
-          setLocations([[coordinates[0], coordinates[1]]] as [number, number][]);
+          setLocations(new Array({ id: 1, user: 'SomeUser', coordinates }) as { id: number; user: string; coordinates: [number, number]; }[]);
         } else {
           console.log('No se encontraron resultados para la búsqueda.');
         }
@@ -129,14 +133,18 @@ export const useMapSearch = ({ map, setLocations }: MapSearchHookProps) => {
 
         geocoder.on('result', (event) => {
           const { center } = event.result.geometry;
-          setLng(center[0]);
-          setLat(center[1]);
-          setZoom(12);
-          setLocations([[center[0], center[1]]] as [number, number][]);
+
+          if (center && Array.isArray(center)) {
+            setLng(center[0]);
+            setLat(center[1]);
+            setZoom(12);
+            setLocations(new Array({ id: 1, user: 'SomeUser', coordinates: center }) as { id: number; user: string; coordinates: [number, number]; }[]);
+          } else {
+            console.error('Invalid center coordinates:', center);
+          }
         });
       }
     };
-
     initializeGeocoder();
   }, [map, setLocations]);
 

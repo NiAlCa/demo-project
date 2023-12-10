@@ -10,11 +10,13 @@
 
 .mapContainer {
   position: relative;
+  display: flex;
+
 }
 
-#geocoder-container {
+div#geocoder-container {
   position: absolute;
-  top: 10px;
+  top: 83px;
   right: 10px;
 }
 
@@ -29,4 +31,5 @@
 .ubicaciones {
   background-color: aliceblue;
   color: black;
+  padding-top: 20px;
 }
