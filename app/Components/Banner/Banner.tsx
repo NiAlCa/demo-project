@@ -71,16 +71,14 @@ const Banner: React.FC<BannerProps> = ({ selectedFavorites }) => {
       case 3:
         styles.gridTemplateColumns = 'repeat(3, 1fr)';
         break;
-      case 4:
-      case 5:
       case 6:
         styles.gridTemplateColumns = 'repeat(3, 2fr)';
         break;
-      case 7:
       case 8:
         styles.gridTemplateColumns = 'repeat(6, 1fr)';
         break;
       case 9:
+        console.log("Caso 9 ")
         styles.gridTemplateColumns = 'repeat(6, 1fr)';
         styles.gridTemplateRows = 'repeat(2, 1fr)';
         styles.gridTemplateAreas = `
