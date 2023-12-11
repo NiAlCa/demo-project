@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import html2canvas from 'html2canvas';
-import styles from './Banner.module.scss';
+import style from './Banner.module.scss';
 import Image from 'next/image';
 
 type NFT = {
@@ -21,7 +21,7 @@ const Banner: React.FC<BannerProps> = ({ selectedFavorites }) => {
 
   useEffect(() => {
     if (imagesLoaded === selectedFavorites.length) {
-      // Todo: Añadir acciones adicionales si es necesario
+      // Aquí puedes realizar alguna acción una vez que todas las imágenes se hayan cargado.
     }
   }, [imagesLoaded, selectedFavorites.length]);
 
@@ -51,51 +51,68 @@ const Banner: React.FC<BannerProps> = ({ selectedFavorites }) => {
     }
   };
 
-  const getGridStyles = () => {
-    if (selectedFavorites.length === 9) {
-      return {
-        gridTemplateColumns: 'repeat(6, 1fr)',
-        gridTemplateRows: 'repeat(2, 1fr)',
-        gridTemplateAreas: `
-          "two three one one four five"
-          "six seven one one eight nine"
-        `
-      };
-    }
-    // Agregar lógica para otros tamaños si es necesario
-    return { gridTemplateColumns: 'repeat(3, 1fr)' };
-  };
-
-  const getItemStyle = (index) => {
-    if (selectedFavorites.length === 9) {
-      const gridAreaNames = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-      return { gridArea: gridAreaNames[index] };
-    }
-    return {};
-  };
-
   const ipfsToHttpUrl = (ipfsUrl: string) => {
     return ipfsUrl.replace(/^ipfs:\/\/(.+)/, 'https://ipfs.io/ipfs/$1');
   };
 
+  const getGridStyles = () => {
+    let styles: React.CSSProperties = {
+      display: 'grid',
+      gridGap: '0px',
+    };
+
+    switch (selectedFavorites.length) {
+      case 1:
+        styles.gridTemplateColumns = 'repeat(1, 1fr)';
+        break;
+      case 2:
+        styles.gridTemplateColumns = 'repeat(2, 1fr)';
+        break;
+      case 3:
+        styles.gridTemplateColumns = 'repeat(3, 1fr)';
+        break;
+      case 4:
+      case 5:
+      case 6:
+        styles.gridTemplateColumns = 'repeat(3, 2fr)';
+        break;
+      case 7:
+      case 8:
+        styles.gridTemplateColumns = 'repeat(6, 1fr)';
+        break;
+      case 9:
+        styles.gridTemplateColumns = 'repeat(6, 1fr)';
+        styles.gridTemplateRows = 'repeat(2, 1fr)';
+        styles.gridTemplateAreas = `
+          "two three one one four five"
+          "six seven one one eight nine"
+        `;
+        break;
+      default:
+        styles.gridTemplateColumns = 'repeat(6, 1fr)';
+    }
+
+    return styles;
+  };
+
   return (
-    <div className={styles.bannerContainer}>
-      <div id="banner" className={styles.banner} style={getGridStyles()}>
-        {selectedFavorites.map((nft, index) => (
-          <div key={nft.assetId} className={styles.favoriteItem} style={getItemStyle(index)}>
+    <div className={style.bannerContainer}>
+      <div id="banner" className={style.banner} style={getGridStyles()}>
+        {selectedFavorites.map((nft) => (
+          <div key={nft.assetId} className={style.favoriteItem}>
             <Image
-              src={ipfsToHttpUrl(nft.image)} 
+              src={ipfsToHttpUrl(nft.image)}
               alt={nft.name}
-              className={styles.favoriteImage}
-              width={500} 
-              height={500} 
+              className={style.favoriteImage}
+              width={500}
+              height={500}
               onLoad={onImageLoad}
               crossOrigin="anonymous"
             />
           </div>
         ))}
       </div>
-      <button onClick={downloadBanner} className={styles.downloadButton}>
+      <button onClick={downloadBanner} className={style.downloadButton}>
         Download Banner as PNG
       </button>
     </div>
