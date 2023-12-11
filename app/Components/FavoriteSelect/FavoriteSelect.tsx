@@ -67,8 +67,8 @@ export const FavoriteSelect: React.FC<FavoriteSelectProps> = ({
             <Image
               src={ipfsToHttpUrl(nft.image)} 
               alt={nft.name}
-              width={500} 
-              height={500} 
+              width={250} 
+              height={250} 
             />
           
             {selectedFavorites.some(selectedNft => selectedNft.assetId === nft.assetId) ? (
