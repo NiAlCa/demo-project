@@ -3,7 +3,6 @@ import html2canvas from 'html2canvas';
 import styles from './Banner.module.scss';
 import Image from 'next/image';
 
-
 type NFT = {
   name: string;
   description: string;
@@ -12,6 +11,7 @@ type NFT = {
   collection: string;
   external_url: string;
 };
+
 interface BannerProps {
   selectedFavorites: NFT[];
 }
@@ -21,6 +21,7 @@ const Banner: React.FC<BannerProps> = ({ selectedFavorites }) => {
 
   useEffect(() => {
     if (imagesLoaded === selectedFavorites.length) {
+      // Todo: Añadir acciones adicionales si es necesario
     }
   }, [imagesLoaded, selectedFavorites.length]);
 
@@ -50,23 +51,27 @@ const Banner: React.FC<BannerProps> = ({ selectedFavorites }) => {
     }
   };
 
-  const getGridTemplateColumns = () => {
-    switch (selectedFavorites.length) {
-      case 1:
-        return 'repeat(1, 1fr)';
-      case 2:
-        return 'repeat(2, 1fr)';
-      case 3:
-        return 'repeat(3, 1fr)';
-      case 4:
-        return 'repeat(3, 2fr)'; 
-      case 5:
-        return 'repeat(3, 2fr)';
-      case 6:
-        return 'repeat(3, 2fr)'; 
-      default:
-        return 'repeat(6, 1fr)'; 
+  const getGridStyles = () => {
+    if (selectedFavorites.length === 9) {
+      return {
+        gridTemplateColumns: 'repeat(6, 1fr)',
+        gridTemplateRows: 'repeat(2, 1fr)',
+        gridTemplateAreas: `
+          "two three one one four five"
+          "six seven one one eight nine"
+        `
+      };
     }
+    // Agregar lógica para otros tamaños si es necesario
+    return { gridTemplateColumns: 'repeat(3, 1fr)' };
+  };
+
+  const getItemStyle = (index) => {
+    if (selectedFavorites.length === 9) {
+      const gridAreaNames = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+      return { gridArea: gridAreaNames[index] };
+    }
+    return {};
   };
 
   const ipfsToHttpUrl = (ipfsUrl: string) => {
@@ -75,25 +80,18 @@ const Banner: React.FC<BannerProps> = ({ selectedFavorites }) => {
 
   return (
     <div className={styles.bannerContainer}>
-      <div id="banner" className={styles.banner} style={{ 
-        gridTemplateColumns: getGridTemplateColumns(), 
-        display: 'grid',
-        gridGap: '0px'
-      }}>
-        {selectedFavorites.map((nft) => (
-          <div key={nft.assetId} className={styles.favoriteItem}>
-
+      <div id="banner" className={styles.banner} style={getGridStyles()}>
+        {selectedFavorites.map((nft, index) => (
+          <div key={nft.assetId} className={styles.favoriteItem} style={getItemStyle(index)}>
             <Image
-               src={ipfsToHttpUrl(nft.image)} 
-               alt={nft.name}
-               className={styles.favoriteImage}
+              src={ipfsToHttpUrl(nft.image)} 
+              alt={nft.name}
+              className={styles.favoriteImage}
               width={500} 
               height={500} 
               onLoad={onImageLoad}
               crossOrigin="anonymous"
             />
-
-   
           </div>
         ))}
       </div>
