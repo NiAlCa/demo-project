@@ -11,8 +11,8 @@ const Map: React.FC = () => {
     Array<{ id: number; user: string; coordinates: [number, number] }>
   >([]);
   const map = useMapInitialization(setUserLocations);
-  useMapSearch({ map, setLocations: setUserLocations }); // Use the same setLocations function
-
+  useMapSearch({ map, setLocations: setUserLocations });
+  
   const pinesDeWilmer = [
     { lat: -64.63171306383305, long: -38.08845482731223 },
     { lat: -106.29838032134909, long:  41.293706310582905},
