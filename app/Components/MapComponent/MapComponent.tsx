@@ -13,6 +13,12 @@ const Map: React.FC = () => {
   const map = useMapInitialization(setUserLocations);
   useMapSearch({ map, setLocations: setUserLocations }); // Use the same setLocations function
 
+  const pinesDeWilmer = [
+    { lat: -64.63171306383305, long: -38.08845482731223 },
+    { lat: -106.29838032134909, long:  41.293706310582905},
+    { lat: 108.70162272743528, long:  67.00647493019483},
+  ];
+
   return (
     <div className={styles.container}>
       <div className={styles.mapContainer}>
