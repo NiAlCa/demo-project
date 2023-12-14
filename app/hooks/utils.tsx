@@ -15,8 +15,8 @@ export const useMapInitialization = (setLocations: React.Dispatch<React.SetState
     if (!map) {
       const setLocationsState = (newLocations: [number, number][]) => {
         setLocations(newLocations.map((coordinates, index) => ({
-          id: index + 1, // Assuming each location has a unique ID
-          user: 'SomeUser', // You may want to replace this with the actual user
+          id: index + 1, 
+          user: 'SomeUser', 
           coordinates,
         })));
       };

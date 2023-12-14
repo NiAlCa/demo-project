@@ -104,7 +104,7 @@ const PublicMap: React.FC = () => {
   return (
     <div className={styles.mapContainer}>
       <Map
-        style="mapbox://styles/mapbox/light-v10"
+        style="mapbox://styles/mapbox/dark-v10"
         containerStyle={{
           height: '80vh',
           width: '90vw',
