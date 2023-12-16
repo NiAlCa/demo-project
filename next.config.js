@@ -4,6 +4,7 @@ const nextConfig = {
   i18n,
   images: {
     domains: ["rrcc.mypinata.cloud"],
+    domains: ['ipfs.io'],
   },
 };
 

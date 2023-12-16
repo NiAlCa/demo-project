@@ -1,0 +1,57 @@
+@use '../../../styles/mixins' as *;
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+
+}
+
+.card {
+  width: 300px;
+  margin: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+
+  @include respond-to(sm) {
+    width: auto;
+  }
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  overflow: hidden;
+  cursor: pointer;
+
+  .image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+.isFavorite,
+.setFavorite {
+  @include toRem(width, 25);
+  @include toRem(height, 25);
+
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.isFavorite {
+  fill: var(--blue);
+}
+
+.setFavorite {
+  fill: gray;
+}
