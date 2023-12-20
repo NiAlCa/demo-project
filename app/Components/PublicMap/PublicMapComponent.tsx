@@ -36,7 +36,6 @@ const PublicMap: React.FC = () => {
         },
         properties: {
           city: 'Paris',
-          color: 'red',
         },
       },
       {
@@ -47,7 +46,6 @@ const PublicMap: React.FC = () => {
         },
         properties: {
           city: 'Madrid',
-          color: 'blue',
         },
       },
       {
@@ -58,7 +56,6 @@ const PublicMap: React.FC = () => {
         },
         properties: {
           city: 'Brussels',
-          color: 'purple',
         },
       },
     ],
