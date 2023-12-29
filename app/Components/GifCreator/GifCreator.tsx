@@ -1,11 +1,21 @@
+
+
 import React, { useState } from 'react';
 import gifshot from 'gifshot';
-import { NFT } from '../../data/LastSongData.mock';
+
+
+type NFT = {
+  name: string;
+  description: string;
+  image: string;
+  assetId: string;
+  collection: string;
+  external_url: string;
+};
 
 interface GenerateGifProps {
   selectedFavorites: NFT[];
 }
-
 
 
   
