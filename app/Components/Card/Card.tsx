@@ -14,8 +14,12 @@ const FavoriteAvatar: React.FC<AvatarProps> = ({ images }) => {
       interval = setInterval(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
       }, 1000); 
-    }
-
+    }/*
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };*/
   }, [isFavorite, images.length]);
 
   const toggleFavorite = () => {
