@@ -57,12 +57,8 @@ const Dev = () => {
           size={"large"}
         />
 
-        <FavoriteSelect
-          selectedFavorites={selectedFavorites}
-          setSelectedFavorites={setSelectedFavorites}
-        />
-
-        <Banner selectedFavorites={selectedFavorites} />
+        <Banner selectedFavorites={selectedFavorites}
+         setSelectedFavorites={setSelectedFavorites} />
       </div>
     </BasePage>
   );

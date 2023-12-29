@@ -15,11 +15,13 @@ type NFT = {
 interface FavoriteSelectProps {
   selectedFavorites: NFT[];
   setSelectedFavorites: React.Dispatch<React.SetStateAction<NFT[]>>;
+  isSelectionLimited: boolean;
 }
 
 export const FavoriteSelect: React.FC<FavoriteSelectProps> = ({
   selectedFavorites,
   setSelectedFavorites,
+  isSelectionLimited,
 }) => {
   const [nfts, setNfts] = useState<NFT[]>([]);
 
@@ -47,9 +49,14 @@ export const FavoriteSelect: React.FC<FavoriteSelectProps> = ({
   const toggleFavorite = (assetId: string) => {
     setSelectedFavorites(prevSelected => {
       const isFavorite = prevSelected.some(nft => nft.assetId === assetId);
-      return isFavorite
-        ? prevSelected.filter(nft => nft.assetId !== assetId)
-        : [...prevSelected, ...nfts.filter(nft => nft.assetId === assetId)];
+      if (isFavorite) {
+        // Remove if it's already a favorite
+        return prevSelected.filter(nft => nft.assetId !== assetId);
+      } else if (!isSelectionLimited || prevSelected.length < selectedFavorites.length) {
+        // Add if it's not a favorite and selection isn't limited
+        return [...prevSelected, ...nfts.filter(nft => nft.assetId === assetId)];
+      }
+      return prevSelected; // Return previous state if the selection is limited
     });
   };
 
@@ -61,16 +68,13 @@ export const FavoriteSelect: React.FC<FavoriteSelectProps> = ({
     <div className={styles.container}>
       {nfts.map((nft: NFT) => (
         <div key={nft.assetId} className={styles.card}>
-          <div className={styles.imageContainer} 
-           onClick={() => toggleFavorite(nft.assetId)}
-          > 
+          <div className={styles.imageContainer} onClick={() => toggleFavorite(nft.assetId)}>
             <Image
-              src={ipfsToHttpUrl(nft.image)} 
+              src={ipfsToHttpUrl(nft.image)}
               alt={nft.name}
-              width={250} 
-              height={250} 
+              width={250}
+              height={250}
             />
-          
             {selectedFavorites.some(selectedNft => selectedNft.assetId === nft.assetId) ? (
               <AiFillHeart
                 className={styles.isFavorite}

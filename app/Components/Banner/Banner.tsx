@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import html2canvas from 'html2canvas';
 import style from './Banner.module.scss';
 import Image from 'next/image';
+import { FavoriteSelect } from '../FavoriteSelect/FavoriteSelect';
 
 type NFT = {
   name: string;
@@ -14,16 +15,23 @@ type NFT = {
 
 interface BannerProps {
   selectedFavorites: NFT[];
+  setSelectedFavorites: React.Dispatch<React.SetStateAction<NFT[]>>;
 }
 
-const Banner: React.FC<BannerProps> = ({ selectedFavorites }) => {
+const Banner: React.FC<BannerProps> = ({ selectedFavorites, setSelectedFavorites }) => {
   const [imagesLoaded, setImagesLoaded] = useState(0);
+  const [selectedCase, setSelectedCase] = useState(0);
 
   useEffect(() => {
     if (imagesLoaded === selectedFavorites.length) {
-      // Aquí puedes realizar alguna acción una vez que todas las imágenes se hayan cargado.
+      // Actions once all images are loaded.
     }
   }, [imagesLoaded, selectedFavorites.length]);
+
+  const numberToWord = (num: number) => {
+    const words = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
+    return words[num] || "null";
+  };
 
   const onImageLoad = () => {
     setImagesLoaded((current) => current + 1);
@@ -61,43 +69,67 @@ const Banner: React.FC<BannerProps> = ({ selectedFavorites }) => {
       gridGap: '0px',
     };
 
-    switch (selectedFavorites.length) {
+    switch (selectedCase) {
       case 1:
-        styles.gridTemplateColumns = 'repeat(1, 1fr)';
-        break;
-      case 2:
-        styles.gridTemplateColumns = 'repeat(2, 1fr)';
+        styles.gridTemplateColumns = '1fr';
         break;
       case 3:
         styles.gridTemplateColumns = 'repeat(3, 1fr)';
+        styles.gridTemplateAreas = `
+          "one two  three "
+        `;
         break;
-      case 6:
-        styles.gridTemplateColumns = 'repeat(3, 2fr)';
-        break;
-      case 8:
-        styles.gridTemplateColumns = 'repeat(6, 1fr)';
-        break;
-      case 9:
-        console.log("Caso 9 ")
+      case 12:
         styles.gridTemplateColumns = 'repeat(6, 1fr)';
         styles.gridTemplateRows = 'repeat(2, 1fr)';
         styles.gridTemplateAreas = `
-          "two three one one four five"
-          "six seven one one eight nine"
+        "one two  three four five six"
+        " seven eight nine ten eleven twelve "
+     
+      `;
+        
+        break;
+      case 9:
+        styles.gridTemplateColumns = 'repeat(6, 1fr)';
+        styles.gridTemplateRows = 'repeat(2, 1fr)';
+        styles.gridTemplateAreas = `
+        "two three one one four five"
+        "six seven one one eight nine"
         `;
         break;
-      default:
-        styles.gridTemplateColumns = 'repeat(6, 1fr)';
     }
 
     return styles;
   };
 
+  const handleCaseSelection = (caseNum: number) => {
+    setSelectedCase(caseNum);
+    setSelectedFavorites([]); // Reset selected favorites when case changes
+  };
+
+  const isSelectionLimited = selectedFavorites.length >= selectedCase;
+
   return (
     <div className={style.bannerContainer}>
+      <div className={style.caseSelection}>
+        {[1, 3, 12, 9].map((caseNum) => (
+          <button key={caseNum} onClick={() => handleCaseSelection(caseNum)}>
+            Case {caseNum}
+          </button>
+        ))}
+      </div>
+
+      {selectedCase > 0 && (
+        <FavoriteSelect
+          selectedFavorites={selectedFavorites}
+          setSelectedFavorites={setSelectedFavorites}
+          isSelectionLimited={isSelectionLimited}
+        />
+      )}
+
       <div id="banner" className={style.banner} style={getGridStyles()}>
-        {selectedFavorites.map((nft) => (
-          <div key={nft.assetId} className={style.favoriteItem}>
+        {selectedFavorites.map((nft, index) => (
+          <div key={nft.assetId} className={style.favoriteItem} style={{ gridArea: numberToWord(index) }}>
             <Image
               src={ipfsToHttpUrl(nft.image)}
               alt={nft.name}
@@ -110,9 +142,11 @@ const Banner: React.FC<BannerProps> = ({ selectedFavorites }) => {
           </div>
         ))}
       </div>
-      <button onClick={downloadBanner} className={style.downloadButton}>
-        Download Banner as PNG
-      </button>
+      {imagesLoaded === selectedFavorites.length && (
+        <button onClick={downloadBanner} className={style.downloadButton}>
+          Download Banner as PNG
+        </button>
+      )}
     </div>
   );
 };
